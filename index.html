@@ -74,17 +74,27 @@
     <article id="post-XSS漏洞入门" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/04/26/XSS%E6%BC%8F%E6%B4%9E%E5%85%A5%E9%97%A8/" class="article-date">
-  <time class="dt-published" datetime="2022-04-26T07:14:02.376Z" itemprop="datePublished">2022-04-26</time>
+  <time class="dt-published" datetime="2022-04-26T08:34:33.000Z" itemprop="datePublished">2022-04-26</time>
 </a>
     
   </div>
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/04/26/XSS%E6%BC%8F%E6%B4%9E%E5%85%A5%E9%97%A8/">XSS</a>
+    </h1>
+  
+
+      </header>
+    
     <div class="e-content article-entry" itemprop="articleBody">
       
         <h1 id="XSS漏洞入门"><a href="#XSS漏洞入门" class="headerlink" title="XSS漏洞入门"></a>XSS漏洞入门</h1><p><strong>XSS</strong>又叫CSS(Cross Site Script)跨站脚本攻击。</p>
-<h2 id="什么是跨站脚本攻击呢？"><a href="#什么是跨站脚本攻击呢？" class="headerlink" title="什么是跨站脚本攻击呢？"></a>什么是跨站脚本攻击呢？</h2><p>  它指的是攻击者在web页面中插入恶意的js代码，当用户浏览该页面时嵌入其web页面的恶意js代码将会被执行，从而达到攻击者的一些恶意目的(可以通过xss和csrf结合起来达到getshell的效果)。<br>利用我们已知的一些方法向web页面插入js代码，使插入的js代码被浏览器执行，访问该页面的用户就会遭到攻击</p>
+<h2 id="什么是跨站脚本攻击呢？"><a href="#什么是跨站脚本攻击呢？" class="headerlink" title="什么是跨站脚本攻击呢？"></a>什么是跨站脚本攻击呢？</h2><p>  它指的是攻击者在web页面中插入恶意的js代码，当用户浏览该页面时嵌入其web页面的恶意js代码将会被执行，从而达到攻击者的一些恶意目的(可以通过xss和csrf结合起来达到getshell的效果)。<br>利用我们已知的一些方法向web页面插入js代码，使插入的js代码被浏览器执行，访问该页面的用户就会遭到攻击。</p>
 <p><img src="/../images/1.png"></p>
 <p>xss的危害：</p>
 <p>1、网络钓鱼，包括盗取各类用户账号；</p>
@@ -101,6 +111,7 @@
 <p>主要的受害对象是：使用含有xss漏洞网页的用户。</p>
 <hr>
 <h2 id="xss分类"><a href="#xss分类" class="headerlink" title="xss分类"></a>xss分类</h2><h4 id="1-反射型"><a href="#1-反射型" class="headerlink" title="1.反射型"></a>1.反射型</h4><p>通过get请求发送到后端，后端直接打印给前端页面上这一过程就称之为反射型xss。</p>
+<p>我们以DVWA靶场为例</p>
 <p><img src="/../images/2.png"></p>
 <p>我们输入一段弹窗脚本，点击提交，结果如下</p>
 <p><img src="/../images/3.png"></p>
@@ -135,7 +146,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/04/26/XSS%E6%BC%8F%E6%B4%9E%E5%85%A5%E9%97%A8/" data-id="cl2fvuysk0000ewcoa6gyab1u" data-title="" class="article-share-link">Teilen</a>
+      <a data-url="http://example.com/2022/04/26/XSS%E6%BC%8F%E6%B4%9E%E5%85%A5%E9%97%A8/" data-id="cl2fwbvy7000004co7mj3bsgx" data-title="XSS" class="article-share-link">Teilen</a>
       
       
       
@@ -178,7 +189,7 @@
       <ul>
         
           <li>
-            <a href="/2022/04/26/XSS%E6%BC%8F%E6%B4%9E%E5%85%A5%E9%97%A8/">(no title)</a>
+            <a href="/2022/04/26/XSS%E6%BC%8F%E6%B4%9E%E5%85%A5%E9%97%A8/">XSS</a>
           </li>
         
       </ul>
