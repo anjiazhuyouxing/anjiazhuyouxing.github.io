@@ -152,6 +152,75 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-PHP_pwethebox-php是直接最好的语言" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/04/28/PHP_pwethebox-php%E6%98%AF%E7%9B%B4%E6%8E%A5%E6%9C%80%E5%A5%BD%E7%9A%84%E8%AF%AD%E8%A8%80/">php</a>
+    </h1>
+  
+
+        
+        <a href="/2022/04/28/PHP_pwethebox-php%E6%98%AF%E7%9B%B4%E6%8E%A5%E6%9C%80%E5%A5%BD%E7%9A%84%E8%AF%AD%E8%A8%80/" class="archive-article-date">
+  	<time datetime="2022-04-28T06:45:54.019Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h1><h3 id="pwnthebox-php是最好的语言"><a href="#pwnthebox-php是最好的语言" class="headerlink" title="pwnthebox-php是最好的语言"></a>pwnthebox-php是最好的语言</h3><p>审计代码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"><span class="title function_ invoke__">show_source</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">@<span class="keyword">include_once</span> <span class="string">&#x27;flag.php&#x27;</span>;</span><br><span class="line"><span class="comment">//前端攻城狮跑路了，不过PHP是最好的语言</span></span><br><span class="line">    <span class="variable">$a</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">    <span class="variable">$b</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;b&#x27;</span>];</span><br><span class="line">    <span class="variable">$good</span> = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_ invoke__">sha1</span>(<span class="variable">$a</span>)===<span class="title function_ invoke__">sha1</span>(<span class="variable">$b</span>)) &#123;</span><br><span class="line">        <span class="variable">$good</span> = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">die</span>(<span class="string">&#x27;bypass&#x27;</span>);</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$good</span> &amp;&amp; <span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;key&#x27;</span>]))&#123;</span><br><span class="line">        <span class="variable">$message</span> = <span class="title function_ invoke__">json_decode</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;key&#x27;</span>]);</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$message</span>-&gt;key==<span class="variable">$key</span>) &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">        &#125;    </span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">die</span>(<span class="string">&#x27;还差一点就拿到flag了&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这里有三个参数，其中a的值要和b的值相等，k的值经过了json_decode加密，我们让key&#x3D;{“key”;0},构造payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://xxxxxxxxxx/?a=1&amp;b=1&amp;key=&#123;&quot;key&quot;:0&#125;</span><br></pre></td></tr></table></figure>
+
+<p>得到flag。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/04/28/PHP_pwethebox-php%E6%98%AF%E7%9B%B4%E6%8E%A5%E6%9C%80%E5%A5%BD%E7%9A%84%E8%AF%AD%E8%A8%80/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-CTFHub_N1Book-XSS闯关" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
